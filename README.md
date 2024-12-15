@@ -1,66 +1,88 @@
-## Foundry
+# NFT Marketplace
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A decentralized NFT marketplace smart contract that enables users to create and accept buy/sell offers for NFTs. Built with Solidity and using the UUPS proxy pattern for upgradeability.
 
-Foundry consists of:
+A final project for the BlockCoders Solidity course.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Features
 
-## Documentation
+- Create and accept sell offers for NFTs
+- Create and accept buy offers for NFTs
+- Time-limited offers with deadlines
+- Secure ETH and NFT transfers
+- Upgradeable contract using UUPS proxy pattern
+- NFT recovery mechanism for stuck tokens
+- Comprehensive test coverage
 
-https://book.getfoundry.sh/
+## Smart Contracts
 
-## Usage
+- `NFTMarketplace.sol`: The main marketplace contract
+- `CoolNFT.sol`: A sample NFT contract for testing purposes
 
-### Build
+## Technical Details
 
-```shell
-$ forge build
+### Dependencies
+
+- OpenZeppelin Contracts
+- OpenZeppelin Contracts Upgradeable
+- Foundry for development and testing
+
+### Key Features
+
+#### Sell Offers
+- Users can create sell offers by specifying NFT details, price, and deadline
+- NFTs are held in escrow by the marketplace until the offer is accepted or cancelled
+- Buyers can accept sell offers by sending the required ETH
+
+#### Buy Offers
+- Users can create buy offers by sending ETH and specifying NFT details and deadline
+- ETH is held in escrow until the offer is accepted or cancelled
+- NFT owners can accept buy offers by approving and transferring their NFT
+
+#### Safety Features
+- Deadline-based offer expiration
+- Owner-only NFT recovery function
+- Secure ETH transfers with failure handling
+- Access control for critical functions
+
+## Development
+
+### Prerequisites
+
+- [Foundry](https://github.com/foundry-rs/foundry)
+- Solidity ^0.8.28
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/ceseshi/NFTMarketplace.git
+cd NFTMarketplace
 ```
 
-### Test
+2. Install dependencies:
 
-```shell
-$ forge test
+```bash
+forge install
 ```
 
-### Format
+3. Run tests:
 
-```shell
-$ forge fmt
+```bash
+forge test
 ```
 
-### Gas Snapshots
+4. Deploy the contract:
 
-```shell
-$ forge snapshot
+```bash
+forge script script/NFTMarketplace.s.sol --rpc-url <RPC_URL> --account <KEYSTORE_ACCOUNT> --broadcast
 ```
 
-### Anvil
+## License
 
-```shell
-$ anvil
-```
+MIT
 
-### Deploy
+## Contributing
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
